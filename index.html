@@ -1,88 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeLab</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodeLab - Online Coding Practice</title>
+
+    <meta name="description"
+          content="CodeLab is a mobile-friendly online coding practice platform for learning Python and programming.">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-  <h1>💻 CodeLab</h1>
-  <button id="menuBtn">☰</button>
+    <h1>💻 CodeLab</h1>
+    <button id="menuBtn">☰</button>
 </header>
 
+
+<!-- MENU -->
+
 <div id="mainMenu" class="hidden">
-  <button id="codeMenuBtn">💻 Code</button>
-  <button id="practiceMenuBtn">📚 Practice</button>
-  <button id="themeBtn">🌙 Dark Mode</button>
+
+    <button id="codeMenuBtn">
+        💻 Code
+    </button>
+
+    <button id="practiceMenuBtn">
+        📚 Practice
+    </button>
+
+    <button id="themeBtn">
+        🌙 Dark Mode
+    </button>
+
 </div>
+
+
+<!-- PRACTICE -->
 
 <section id="practiceSection" class="hidden">
 
-  <h2>📚 Python Practice</h2>
+    <h2>📚 Python Practice</h2>
 
-  <div class="difficulty-buttons">
-    <button onclick="showProblems('beginner')">
-      🟢 Beginner
-      <small>20 Problems</small>
-    </button>
+    <div class="difficulty-buttons">
 
-    <button onclick="showProblems('medium')">
-      🟡 Medium
-      <small>20 Problems</small>
-    </button>
+        <button onclick="showProblems('beginner')">
+            🟢 Beginner
+            <small>20 Problems</small>
+        </button>
 
-    <button onclick="showProblems('advanced')">
-      🔴 Advanced
-      <small>20 Problems</small>
-    </button>
-  </div>
+        <button onclick="showProblems('medium')">
+            🟡 Medium
+            <small>20 Problems</small>
+        </button>
 
-  <div id="problemList"></div>
+        <button onclick="showProblems('advanced')">
+            🔴 Advanced
+            <small>20 Problems</small>
+        </button>
+
+    </div>
+
+    <div id="problemList"></div>
 
 </section>
 
-  <main>
+
+<!-- CODE AREA -->
+
+<main>
+
+    <!-- LANGUAGE -->
 
     <div class="language">
-      <span id="languageIcon">🐍</span>
-      <span id="languageName">Python</span>
-      <button id="languageBtn">▼</button>
+
+        <span id="languageIcon">🐍</span>
+
+        <span id="languageName">
+            Python
+        </span>
+
+        <button id="languageBtn">
+            ▼
+        </button>
+
     </div>
 
+
+    <!-- LANGUAGE MENU -->
+
     <div id="languageMenu" class="hidden">
-      <button>🐍 Python</button>
-      <button>☕ Java</button>
-      <button>🟨 JavaScript</button>
-      <button>🔵 C</button>
-      <button>🔷 C++</button>
-      <button>🗄️ SQL</button>
+
+        <button>🐍 Python</button>
+
+        <button>☕ Java</button>
+
+        <button>🟨 JavaScript</button>
+
+        <button>🔵 C</button>
+
+        <button>🔷 C++</button>
+
+        <button>🗄️ SQL</button>
+
     </div>
+
+
+    <!-- INPUT -->
+
+    <div class="input-container">
+
+        <label for="inputBox">
+            Input
+        </label>
+
+        <textarea
+            id="inputBox"
+            placeholder="Enter input here (optional)..."
+        ></textarea>
+
+    </div>
+
+
+    <!-- EDITOR -->
 
     <textarea id="codeEditor"># Hello brother, start here!
 
 print("Hello brother!")</textarea>
 
+
+    <!-- BUTTONS -->
+
     <div class="buttons">
-      <button id="runBtn">▶ RUN</button>
-      <button id="outputBtn" disabled>📤 OUTPUT</button>
+
+        <button id="runBtn">
+            ▶ RUN
+        </button>
+
+        <button id="outputBtn" disabled>
+            📤 OUTPUT
+        </button>
+
     </div>
 
-    <button id="visualizerBtn">📊 VISUALIZER</button>
+
+    <button id="visualizerBtn">
+        📊 VISUALIZER
+    </button>
+
+
+    <!-- OUTPUT -->
 
     <section id="outputSection" class="hidden">
-      <h2>OUTPUT</h2>
-      <pre id="output"></pre>
-      <button id="backBtn">← Back to Code</button>
+
+        <h2>OUTPUT</h2>
+
+        <pre id="output"></pre>
+
+        <button id="backBtn">
+            ← Back to Code
+        </button>
+
     </section>
 
-  </main>
+</main>
 
-  <script src="problems.js"></script>
-  <script src="script.js"></script>
+
+<!-- PROBLEMS FIRST -->
+
+<script src="problems.js"></script>
+
+<!-- MAIN SCRIPT -->
+
+<script src="script.js"></script>
 
 </body>
 </html>
