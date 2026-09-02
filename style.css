@@ -173,4 +173,11 @@ textarea {
 
   textarea {
     height: 300px;
-    font-size: 14
+    font-size: 14px;
+  }
+
+  .buttons button,
+  #visualizerBtn {
+    font-size: 14px;
+  }
+  }
