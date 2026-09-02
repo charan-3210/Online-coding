@@ -25,106 +25,92 @@ const practiceSection = document.getElementById("practiceSection");
 const problemList = document.getElementById("problemList");
 const themeBtn = document.getElementById("themeBtn");
 
+const visualizerBtn = document.getElementById("visualizerBtn");
+
 let lastOutput = "";
+let lastRunCode = "";
+let lastRunLanguage = "";
 let currentDifficulty = "";
 
-
-// ===============================
-// MAIN MENU
-// ===============================
+// -------------------------------
+// MENU
+// -------------------------------
 
 menuBtn.addEventListener("click", () => {
-  mainMenu.classList.toggle("hidden");
+    mainMenu.classList.toggle("hidden");
 });
-
-
-// ===============================
-// CODE MENU BUTTON
-// ===============================
 
 codeMenuBtn.addEventListener("click", () => {
+    practiceSection.classList.add("hidden");
 
-  practiceSection.classList.add("hidden");
+    codeEditor.classList.remove("hidden");
+    document.querySelector(".language").classList.remove("hidden");
+    document.querySelector(".buttons").classList.remove("hidden");
+    visualizerBtn.classList.remove("hidden");
 
-  codeEditor.classList.remove("hidden");
-  document.querySelector(".language").classList.remove("hidden");
-  document.querySelector(".buttons").classList.remove("hidden");
-  document.getElementById("visualizerBtn").classList.remove("hidden");
-
-  mainMenu.classList.add("hidden");
+    mainMenu.classList.add("hidden");
 });
-
-
-// ===============================
-// PRACTICE MENU BUTTON
-// ===============================
 
 practiceMenuBtn.addEventListener("click", () => {
+    practiceSection.classList.remove("hidden");
 
-  practiceSection.classList.remove("hidden");
+    codeEditor.classList.add("hidden");
+    document.querySelector(".language").classList.add("hidden");
+    document.querySelector(".buttons").classList.add("hidden");
+    visualizerBtn.classList.add("hidden");
 
-  codeEditor.classList.add("hidden");
-  document.querySelector(".language").classList.add("hidden");
-  document.querySelector(".buttons").classList.add("hidden");
-  document.getElementById("visualizerBtn").classList.add("hidden");
+    outputSection.classList.add("hidden");
 
-  mainMenu.classList.add("hidden");
+    mainMenu.classList.add("hidden");
 
-  problemList.innerHTML = `
-    <div class="practice-message">
-      Select a difficulty above.
-    </div>
-  `;
+    problemList.innerHTML =
+        `<div class="practice-message">
+            Select a difficulty above.
+        </div>`;
 });
 
-
-// ===============================
+// -------------------------------
 // LANGUAGE MENU
-// ===============================
+// -------------------------------
 
 languageBtn.addEventListener("click", () => {
-  languageMenu.classList.toggle("hidden");
+    languageMenu.classList.toggle("hidden");
 });
 
-
-const languageButtons =
-  languageMenu.querySelectorAll("button");
-
+const languageButtons = languageMenu.querySelectorAll("button");
 
 languageButtons.forEach(button => {
 
-  button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-    const text = button.textContent;
+        const text = button.textContent.trim();
 
-    if (text.includes("Python")) {
+        if (text.includes("Python")) {
 
-      languageName.textContent = "Python";
-      languageIcon.textContent = "🐍";
+            languageName.textContent = "Python";
+            languageIcon.textContent = "🐍";
 
-      codeEditor.value =
+            codeEditor.value =
 `# Hello brother, start here!
 
 print("Hello brother!")`;
-    }
 
-    else if (text.includes("JavaScript")) {
+        } else if (text.includes("JavaScript")) {
 
-      languageName.textContent = "JavaScript";
-      languageIcon.textContent = "🟨";
+            languageName.textContent = "JavaScript";
+            languageIcon.textContent = "🟨";
 
-      codeEditor.value =
+            codeEditor.value =
 `// Hello brother, start here!
 
 console.log("Hello brother!");`;
-    }
 
-    else if (text.includes("Java")) {
+        } else if (text.includes("Java")) {
 
-      languageName.textContent = "Java";
-      languageIcon.textContent = "☕";
+            languageName.textContent = "Java";
+            languageIcon.textContent = "☕";
 
-      codeEditor.value =
+            codeEditor.value =
 `// Hello brother, start here!
 
 public class Main {
@@ -132,28 +118,26 @@ public class Main {
         System.out.println("Hello brother!");
     }
 }`;
-    }
 
-    else if (text === "🔵 C") {
+        } else if (text === "🔵 C") {
 
-      languageName.textContent = "C";
-      languageIcon.textContent = "🔵";
+            languageName.textContent = "C";
+            languageIcon.textContent = "🔵";
 
-      codeEditor.value =
+            codeEditor.value =
 `#include <stdio.h>
 
 int main() {
     printf("Hello brother!");
     return 0;
 }`;
-    }
 
-    else if (text.includes("C++")) {
+        } else if (text.includes("C++")) {
 
-      languageName.textContent = "C++";
-      languageIcon.textContent = "🔷";
+            languageName.textContent = "C++";
+            languageIcon.textContent = "🔷";
 
-      codeEditor.value =
+            codeEditor.value =
 `#include <iostream>
 using namespace std;
 
@@ -161,210 +145,380 @@ int main() {
     cout << "Hello brother!";
     return 0;
 }`;
-    }
 
-    else if (text.includes("SQL")) {
+        } else if (text.includes("SQL")) {
 
-      languageName.textContent = "SQL";
-      languageIcon.textContent = "🗄️";
+            languageName.textContent = "SQL";
+            languageIcon.textContent = "🗄️";
 
-      codeEditor.value =
+            codeEditor.value =
 `-- Hello brother, start here!
 
 SELECT 'Hello brother!';`;
-    }
+        }
 
-    languageMenu.classList.add("hidden");
+        languageMenu.classList.add("hidden");
 
-    lastOutput = "";
-    outputBtn.disabled = true;
-    outputBtn.textContent = "📤 OUTPUT";
+        // Old output is no longer valid
+        lastOutput = "";
+        lastRunCode = "";
+        lastRunLanguage = "";
 
-  });
-
+        outputBtn.disabled = true;
+        outputBtn.textContent = "📤 OUTPUT";
+    });
 });
 
-
-// ===============================
-// RUN BUTTON
-// ===============================
+// -------------------------------
+// RUN
+// -------------------------------
 
 runBtn.addEventListener("click", () => {
 
-  const language = languageName.textContent;
+    const language = languageName.textContent;
+    const code = codeEditor.value;
 
-  // Temporary demonstration output.
-  // Real code execution will be added later.
+    if (!code.trim()) {
+        showOutput("❌ Error: Code editor is empty.");
+        return;
+    }
 
-  if (language === "Python") {
-    lastOutput = "Hello brother!";
-  }
+    // Python
+    if (language === "Python") {
 
-  else {
-    lastOutput =
-      "Hello brother!\n\n" +
-      "Program finished successfully.";
-  }
+        const result = runSimplePython(code);
 
-  output.textContent = lastOutput;
+        lastOutput = result;
+        lastRunCode = code;
+        lastRunLanguage = language;
 
-  outputBtn.disabled = false;
-  outputBtn.textContent = "📤 OUTPUT";
+        showOutput(result);
 
-  // Change to output screen
-  outputSection.classList.remove("hidden");
+        outputBtn.disabled = false;
+        outputBtn.textContent = "📤 OUTPUT";
 
-  codeEditor.classList.add("hidden");
-  document.querySelector(".language").classList.add("hidden");
-  document.querySelector(".buttons").classList.add("hidden");
-  document.getElementById("visualizerBtn").classList.add("hidden");
+        return;
+    }
 
-  languageMenu.classList.add("hidden");
+    // Other languages will be connected to the real
+    // secure execution server later.
+    const message =
+`${language} runner is not connected yet.
+
+The editor is ready.
+The real ${language} compiler/interpreter will be added next.`;
+
+    lastOutput = message;
+    lastRunCode = code;
+    lastRunLanguage = language;
+
+    showOutput(message);
+
+    outputBtn.disabled = false;
+    outputBtn.textContent = "📤 OUTPUT";
 });
 
+// -------------------------------
+// SIMPLE PYTHON RUNNER
+// -------------------------------
 
-// ===============================
-// OUTPUT BUTTON
-// ===============================
+function runSimplePython(code) {
 
-outputBtn.addEventListener("click", () => {
+    let result = [];
 
-  if (lastOutput !== "") {
+    try {
 
-    output.textContent = lastOutput;
+        const lines = code.split("\n");
+
+        for (let line of lines) {
+
+            line = line.trim();
+
+            // Ignore comments
+            if (line.startsWith("#") || line === "") {
+                continue;
+            }
+
+            // print("Hello")
+            let match = line.match(
+                /^print\s*\(\s*["'](.*?)["']\s*\)\s*$/
+            );
+
+            if (match) {
+                result.push(match[1]);
+                continue;
+            }
+
+            // print(123)
+            match = line.match(
+                /^print\s*\(\s*(-?\d+(?:\.\d+)?)\s*\)\s*$/
+            );
+
+            if (match) {
+                result.push(match[1]);
+                continue;
+            }
+
+            // print("Hello", "World")
+            match = line.match(
+                /^print\s*\(\s*(.*?)\s*\)\s*$/
+            );
+
+            if (match) {
+
+                let content = match[1];
+
+                if (
+                    content.includes('"') ||
+                    content.includes("'")
+                ) {
+
+                    let parts = content.split(",");
+
+                    let text = parts.map(part => {
+
+                        part = part.trim();
+
+                        if (
+                            (part.startsWith('"') &&
+                            part.endsWith('"')) ||
+                            (part.startsWith("'") &&
+                            part.endsWith("'"))
+                        ) {
+                            return part.slice(1, -1);
+                        }
+
+                        return part;
+
+                    });
+
+                    result.push(text.join(" "));
+                    continue;
+                }
+            }
+
+            // Simple arithmetic
+            match = line.match(
+                /^print\s*\(\s*([0-9+\-*/%. ()]+)\s*\)\s*$/
+            );
+
+            if (match) {
+
+                const expression = match[1];
+
+                if (!/^[0-9+\-*/%. ()]+$/.test(expression)) {
+                    return "❌ Error: Invalid expression.";
+                }
+
+                try {
+                    const value = Function(
+                        `"use strict"; return (${expression})`
+                    )();
+
+                    result.push(String(value));
+                    continue;
+
+                } catch {
+                    return "❌ Error: Invalid Python expression.";
+                }
+            }
+
+            return `❌ This Python code needs the real Python engine:
+
+${line}
+
+The full Python engine will be connected next.`;
+        }
+
+        if (result.length === 0) {
+            return "Program finished successfully.\n(No output)";
+        }
+
+        return result.join("\n");
+
+    } catch (error) {
+
+        return "❌ Error: " + error.message;
+    }
+}
+
+// -------------------------------
+// SHOW OUTPUT
+// -------------------------------
+
+function showOutput(text) {
+
+    output.textContent = text;
 
     outputSection.classList.remove("hidden");
 
     codeEditor.classList.add("hidden");
     document.querySelector(".language").classList.add("hidden");
     document.querySelector(".buttons").classList.add("hidden");
-    document.getElementById("visualizerBtn").classList.add("hidden");
-  }
+    visualizerBtn.classList.add("hidden");
+
+    languageMenu.classList.add("hidden");
+}
+
+// -------------------------------
+// OUTPUT BUTTON
+// -------------------------------
+
+outputBtn.addEventListener("click", () => {
+
+    if (lastOutput !== "") {
+
+        output.textContent = lastOutput;
+
+        outputSection.classList.remove("hidden");
+
+        codeEditor.classList.add("hidden");
+        document.querySelector(".language").classList.add("hidden");
+        document.querySelector(".buttons").classList.add("hidden");
+        visualizerBtn.classList.add("hidden");
+    }
 });
 
-
-// ===============================
+// -------------------------------
 // BACK TO CODE
-// ===============================
+// -------------------------------
 
 backBtn.addEventListener("click", () => {
 
-  outputSection.classList.add("hidden");
+    outputSection.classList.add("hidden");
 
-  codeEditor.classList.remove("hidden");
-  document.querySelector(".language").classList.remove("hidden");
-  document.querySelector(".buttons").classList.remove("hidden");
-  document.getElementById("visualizerBtn").classList.remove("hidden");
+    codeEditor.classList.remove("hidden");
+    document.querySelector(".language").classList.remove("hidden");
+    document.querySelector(".buttons").classList.remove("hidden");
+    visualizerBtn.classList.remove("hidden");
 });
 
+// -------------------------------
+// CODE CHANGE DETECTION
+// -------------------------------
 
-// ===============================
-// SHOW PRACTICE PROBLEMS
-// ===============================
+codeEditor.addEventListener("input", () => {
+
+    if (
+        lastRunCode !== "" &&
+        codeEditor.value !== lastRunCode
+    ) {
+        outputBtn.textContent = "📤 OUTPUT (OLD)";
+    } else {
+        outputBtn.textContent = "📤 OUTPUT";
+    }
+});
+
+// -------------------------------
+// PRACTICE PROBLEMS
+// -------------------------------
 
 function showProblems(difficulty) {
 
-  currentDifficulty = difficulty;
+    currentDifficulty = difficulty;
 
-  let problems = pythonProblems[difficulty];
+    const problems = pythonProblems[difficulty];
 
-  problemList.innerHTML = "";
+    problemList.innerHTML = "";
 
-  problems.forEach((problem, index) => {
+    problems.forEach((problem, index) => {
 
-    const card = document.createElement("div");
+        const card = document.createElement("div");
 
-    card.className = "problem-card";
+        card.className = "problem-card";
 
-    card.innerHTML = `
-      <div class="problem-number">
-        ${String(index + 1).padStart(2, "0")}
-      </div>
+        card.innerHTML = `
+            <div class="problem-number">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
 
-      <div class="problem-info">
-        <h3>${problem.title}</h3>
-        <p>${problem.question}</p>
-      </div>
+            <div class="problem-info">
+                <h3>${problem.title}</h3>
+                <p>${problem.question}</p>
+            </div>
 
-      <div class="problem-arrow">
-        →
-      </div>
-    `;
+            <div class="problem-arrow">
+                →
+            </div>
+        `;
 
-    card.addEventListener("click", () => {
-      openProblem(problem);
+        card.addEventListener("click", () => {
+            openProblem(problem);
+        });
+
+        problemList.appendChild(card);
     });
-
-    problemList.appendChild(card);
-  });
 }
 
-
-// ===============================
-// OPEN A PROBLEM
-// ===============================
+// -------------------------------
+// OPEN PRACTICE PROBLEM
+// -------------------------------
 
 function openProblem(problem) {
 
-  practiceSection.classList.add("hidden");
+    practiceSection.classList.add("hidden");
 
-  codeEditor.classList.remove("hidden");
-  document.querySelector(".language").classList.remove("hidden");
-  document.querySelector(".buttons").classList.remove("hidden");
-  document.getElementById("visualizerBtn").classList.remove("hidden");
+    codeEditor.classList.remove("hidden");
+    document.querySelector(".language").classList.remove("hidden");
+    document.querySelector(".buttons").classList.remove("hidden");
+    visualizerBtn.classList.remove("hidden");
 
-  languageName.textContent = "Python";
-  languageIcon.textContent = "🐍";
+    languageName.textContent = "Python";
+    languageIcon.textContent = "🐍";
 
-  codeEditor.value =
+    codeEditor.value =
 `# ${problem.title}
 
 # ${problem.question}
 
-# Write your solution here
+# Example input:
+# ${problem.exampleInput}
+
+# Expected output:
+# ${problem.expectedOutput}
+
+# Write your solution below
 `;
 
-  lastOutput = "";
+    lastOutput = "";
+    lastRunCode = "";
+    lastRunLanguage = "";
 
-  outputBtn.disabled = true;
-  outputBtn.textContent = "📤 OUTPUT";
+    outputBtn.disabled = true;
+    outputBtn.textContent = "📤 OUTPUT";
 
-  outputSection.classList.add("hidden");
+    outputSection.classList.add("hidden");
 }
 
-
-// ===============================
-// DARK / LIGHT THEME
-// ===============================
+// -------------------------------
+// THEME
+// -------------------------------
 
 themeBtn.addEventListener("click", () => {
 
-  document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
 
-  if (document.body.classList.contains("dark-mode")) {
+    if (document.body.classList.contains("dark-mode")) {
 
-    themeBtn.textContent = "☀️ Light Mode";
+        themeBtn.textContent = "☀️ Light Mode";
 
-    localStorage.setItem("theme", "dark");
+        localStorage.setItem("theme", "dark");
 
-  } else {
+    } else {
 
-    themeBtn.textContent = "🌙 Dark Mode";
+        themeBtn.textContent = "🌙 Dark Mode";
 
-    localStorage.setItem("theme", "light");
-  }
+        localStorage.setItem("theme", "light");
+    }
 });
 
-
-// ===============================
-// LOAD SAVED THEME
-// ===============================
+// Load saved theme
 
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
 
-  document.body.classList.add("dark-mode");
+    document.body.classList.add("dark-mode");
 
-  themeBtn.textContent = "☀️ Light Mode";
-}
+    themeBtn.textContent = "☀️ Light Mode";
+  }
