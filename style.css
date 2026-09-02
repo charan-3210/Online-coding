@@ -1,183 +1,496 @@
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  color: #111;
-  min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+    min-height: 100vh;
 }
 
+
+/* HEADER */
+
 header {
-  height: 60px;
-  background: #111;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
+    height: 60px;
+    background: #111;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
 }
 
 header h1 {
-  font-size: 21px;
+    font-size: 21px;
 }
 
 header button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 25px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+
+    font-size: 25px;
 }
+
+
+/* MENU */
+
+#mainMenu {
+    background: white;
+
+    padding: 10px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+#mainMenu button {
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    text-align: left;
+
+    padding: 14px;
+
+    font-size: 16px;
+
+    border-radius: 8px;
+
+    margin-bottom: 4px;
+}
+
+
+/* MAIN */
 
 main {
-  max-width: 700px;
-  margin: auto;
-  padding: 15px;
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 15px;
 }
+
+
+/* LANGUAGE */
 
 .language {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 13px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
 }
 
-.languageName {
-  font-weight: bold;
+#languageName {
+    font-weight: bold;
 }
 
 #languageBtn {
-  margin-left: auto;
-  border: none;
-  background: none;
-  cursor: pointer;
+    margin-left: auto;
+
+    border: none;
+
+    background: none;
+
+    font-size: 16px;
 }
 
+
+/* LANGUAGE MENU */
+
 #languageMenu {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 10px;
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 10px;
 }
 
 #languageMenu button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  background: white;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    background: white;
+
+    text-align: left;
+
+    font-size: 16px;
 }
 
-#languageMenu button:hover {
-  background: #eee;
+
+/* INPUT */
+
+.input-container {
+    margin-bottom: 10px;
 }
 
-textarea {
-  width: 100%;
-  height: 330px;
-  resize: vertical;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #333;
-  background: #1e1e1e;
-  color: #fff;
-  font-family: monospace;
-  font-size: 15px;
-  line-height: 1.5;
-  outline: none;
+.input-container label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
 }
+
+#inputBox {
+    width: 100%;
+
+    height: 80px;
+
+    resize: vertical;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ccc;
+
+    font-family: monospace;
+
+    font-size: 14px;
+}
+
+
+/* CODE EDITOR */
+
+#codeEditor {
+    width: 100%;
+
+    height: 330px;
+
+    resize: vertical;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    border: 1px solid #333;
+
+    background: #1e1e1e;
+
+    color: white;
+
+    font-family: monospace;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    outline: none;
+}
+
+
+/* BUTTONS */
 
 .buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 12px;
 }
 
 .buttons button,
 #visualizerBtn,
 #backBtn {
-  border: none;
-  border-radius: 10px;
-  padding: 13px 18px;
-  font-size: 15px;
-  cursor: pointer;
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 18px;
+
+    font-size: 15px;
 }
 
 #runBtn {
-  background: #111;
-  color: white;
-  flex: 1;
+    background: #111;
+
+    color: white;
+
+    flex: 1;
 }
 
 #outputBtn {
-  background: #ddd;
-  flex: 1;
+    background: #ddd;
+
+    flex: 1;
 }
 
 #outputBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
 }
+
+
+/* VISUALIZER */
 
 #visualizerBtn {
-  width: 100%;
-  margin-top: 10px;
-  background: #ddd;
+    width: 100%;
+
+    margin-top: 10px;
+
+    background: #ddd;
 }
 
-.hidden {
-  display: none !important;
-}
+
+/* OUTPUT */
 
 #outputSection {
-  margin-top: 15px;
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
+    margin-top: 15px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 15px;
 }
 
 #outputSection h2 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 #output {
-  background: #111;
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  min-height: 100px;
-  white-space: pre-wrap;
-  margin-bottom: 12px;
+    background: #111;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    min-height: 120px;
+
+    white-space: pre-wrap;
+
+    overflow-x: auto;
+
+    margin-bottom: 12px;
 }
 
 #backBtn {
-  background: #111;
-  color: white;
+    background: #111;
+
+    color: white;
+
+    width: 100%;
 }
 
+
+/* PRACTICE */
+
+#practiceSection {
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 15px;
+}
+
+#practiceSection h2 {
+    margin-bottom: 15px;
+}
+
+.difficulty-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.difficulty-buttons button {
+    border: none;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.difficulty-buttons small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #666;
+
+    font-weight: normal;
+}
+
+
+/* PROBLEM CARDS */
+
+.problem-card {
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.problem-number {
+    font-size: 18px;
+
+    font-weight: bold;
+
+    min-width: 35px;
+}
+
+.problem-info {
+    flex: 1;
+}
+
+.problem-info h3 {
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.problem-info p {
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+.problem-arrow {
+    font-size: 24px;
+}
+
+.practice-message {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    color: #666;
+}
+
+
+/* HIDDEN */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* DARK MODE */
+
+body.dark-mode {
+    background: #121212;
+
+    color: white;
+}
+
+body.dark-mode #mainMenu,
+body.dark-mode .language,
+body.dark-mode #languageMenu,
+body.dark-mode #languageMenu button,
+body.dark-mode #mainMenu button,
+body.dark-mode #practiceSection,
+body.dark-mode .difficulty-buttons button,
+body.dark-mode .problem-card,
+body.dark-mode #outputSection,
+body.dark-mode .practice-message {
+    background: #1e1e1e;
+
+    color: white;
+
+    border-color: #333;
+}
+
+body.dark-mode .problem-info p,
+body.dark-mode .difficulty-buttons small {
+    color: #bbb;
+}
+
+body.dark-mode #inputBox {
+    background: #1e1e1e;
+
+    color: white;
+
+    border-color: #444;
+}
+
+body.dark-mode #outputBtn,
+body.dark-mode #visualizerBtn {
+    background: #333;
+
+    color: white;
+}
+
+
+/* MOBILE */
+
 @media (max-width: 500px) {
-  main {
-    padding: 10px;
-  }
 
-  textarea {
-    height: 300px;
-    font-size: 14px;
-  }
+    main {
+        padding: 10px;
+    }
 
-  .buttons button,
-  #visualizerBtn {
-    font-size: 14px;
-  }
+    #practiceSection {
+        padding: 10px;
+    }
+
+    #codeEditor {
+        height: 300px;
+
+        font-size: 14px;
+    }
+
+    .buttons button,
+    #visualizerBtn {
+        font-size: 14px;
+    }
+
   }
