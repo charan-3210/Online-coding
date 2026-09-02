@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeLab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+  <header>
+    <h1>💻 CodeLab</h1>
+    <button id="menuBtn">☰</button>
+  </header>
+
+  <main>
+
+    <div class="language">
+      <span id="languageIcon">🐍</span>
+      <span id="languageName">Python</span>
+      <button id="languageBtn">▼</button>
+    </div>
+
+    <div id="languageMenu" class="hidden">
+      <button>🐍 Python</button>
+      <button>☕ Java</button>
+      <button>🟨 JavaScript</button>
+      <button>🔵 C</button>
+      <button>🔷 C++</button>
+      <button>🗄️ SQL</button>
+    </div>
+
+    <textarea id="codeEditor"># Hello brother, start here!
+
+print("Hello brother!")</textarea>
+
+    <div class="buttons">
+      <button id="runBtn">▶ RUN</button>
+      <button id="outputBtn" disabled>📤 OUTPUT</button>
+    </div>
+
+    <button id="visualizerBtn">📊 VISUALIZER</button>
+
+    <section id="outputSection" class="hidden">
+      <h2>OUTPUT</h2>
+      <pre id="output"></pre>
+      <button id="backBtn">← Back to Code</button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
