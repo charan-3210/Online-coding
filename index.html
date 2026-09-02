@@ -9,10 +9,41 @@
 
 <body>
 
-  <header>
-    <h1>💻 CodeLab</h1>
-    <button id="menuBtn">☰</button>
-  </header>
+<header>
+  <h1>💻 CodeLab</h1>
+  <button id="menuBtn">☰</button>
+</header>
+
+<div id="mainMenu" class="hidden">
+  <button id="codeMenuBtn">💻 Code</button>
+  <button id="practiceMenuBtn">📚 Practice</button>
+  <button id="themeBtn">🌙 Dark Mode</button>
+</div>
+
+<section id="practiceSection" class="hidden">
+
+  <h2>📚 Python Practice</h2>
+
+  <div class="difficulty-buttons">
+    <button onclick="showProblems('beginner')">
+      🟢 Beginner
+      <small>20 Problems</small>
+    </button>
+
+    <button onclick="showProblems('medium')">
+      🟡 Medium
+      <small>20 Problems</small>
+    </button>
+
+    <button onclick="showProblems('advanced')">
+      🔴 Advanced
+      <small>20 Problems</small>
+    </button>
+  </div>
+
+  <div id="problemList"></div>
+
+</section>
 
   <main>
 
